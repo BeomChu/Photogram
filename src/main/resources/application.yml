@@ -1,5 +1,5 @@
 server:
-  port: 8080    #포트번호 설정
+  port: 800    #포트번호 설정
   servlet:
     context-path: /   #경로 혹은 요청설정..? @GetMapping("/test/1") return "/returnPage"
     encoding:
@@ -34,7 +34,14 @@ spring:
   security:
     user:
       name: test
-      password: 1234   
+      password: 1234
+
+# Unable to start LiveReload server 에러 해결법인데 안됨
+    devtools:
+      livereload:
+        enabled: false
+
+
 
 file:
   path: C:/workspace/springbootwork/upload/
