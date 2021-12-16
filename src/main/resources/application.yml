@@ -21,7 +21,7 @@ spring:
   jpa:                    #jpa 설정
     open-in-view: true    #단어가 너무 어려우니 다시 공부 필요
     hibernate:
-      ddl-auto: update    #서버가 재가동 될때마다 데이터를 다 drop함 (update와
+      ddl-auto: update    #서버가 재가동 될때마다 데이터를 다 drop함 -create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #Table, Column 명칭 전략
     show-sql: true        #sql문이 나가면 콘솔창에 출력해줌

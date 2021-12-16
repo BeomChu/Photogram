@@ -26,7 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll() //나머지는 알아서해
                 .and()
                 .formLogin()
-                .loginPage("/auth/signin") //로그인 페이지 설정
+                .loginPage("/auth/signin") //로그인 페이지 설정  //Get       //시큐리티 설정파일이 auth/signin요청받는걸 기다리고있음.
+                .loginProcessingUrl("/auth/signin")           //Post 스프링 시큐리티가 로그인 프로세스 진행
                 .defaultSuccessUrl("/");   //로그인 성공하면 가는 페이지
         //정상적인 로그인이 되지 않으면 300번대 http 코드가 나오고 다시 로그인페이지 나옴
     }
