@@ -21,7 +21,7 @@ spring:
   jpa:                    #jpa 설정
     open-in-view: true    #단어가 너무 어려우니 다시 공부 필요
     hibernate:
-      ddl-auto: update    #서버가 재가동 될때마다 데이터를 다 drop함 -create
+      ddl-auto: update    #서버가 재가동 될때마다 데이터를 다 drop함 -create ,update, none, create drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #Table, Column 명칭 전략
     show-sql: true        #sql문이 나가면 콘솔창에 출력해줌
@@ -36,10 +36,21 @@ spring:
       name: test
       password: 1234
 
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 991838321683525
+            client-secret: a2c8edc9ed7ce1f89c014ee36b0074db
+            scope:
+              - public_profile
+              - email
+
 # Unable to start LiveReload server 에러 해결법인데 안됨
     devtools:
       livereload:
         enabled: false
+
 
 
 

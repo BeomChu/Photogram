@@ -8,8 +8,70 @@
  */
 
 // (1) 스토리 로드하기
-function storyLoad() {
+let page=0;
 
+function storyLoad() {
+	$.ajax({
+		type:"get",
+		url:`/api/image?page=${page}`,
+		datatype:"json"
+	}).done(res=>{
+		console.log(res);
+		res.data.content.forEach((image)=>{
+			let storyItem = getStoryItem(image);
+			$("#storyList").append(storyItem);
+		});
+	}).fail(error=>{
+		console.log("오류",error);
+	});
+}
+
+storyLoad();
+
+function getStoryitem(image){
+	let item = `
+<div class="story-list__item">
+	<div class="sl__item__header">
+		<div>
+			<img class="profile-image" src="/upload/${image.user.profileImageUrl}" 
+			onerror="this.src='/images/person.jpeg'" />
+		</div>
+		<div>${image.user.username}</div>
+	</div>
+	<div class="sl__item__img">
+		<img src="/upload/${image.postImageUrl}" />
+	</div>
+	<div class="sl__item__contents">
+		<div class="sl__item__contents__icon">
+			<button>`;
+				if(image.likestate){
+					item +=`<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike()"></i>`;
+				}else{
+					item +=`<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike()"></i>`;
+				}
+	item+=`
+			</button>
+		</div>
+		<span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
+		<div class="sl__item__contents__content">
+			<p>${image.caption}</p>
+		</div>
+		<div id="storyCommentList-1">
+			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+				<p>
+					<b>Lovely :</b> 부럽습니다.
+				</p>	
+				<button>
+					<i class=" fas fa-times"></i>
+				</button>
+			</div>
+		</div>
+		<div class="sl__item__input">
+			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
+			<button type="button" onClick="addComment()">게시</button>
+		</div>
+	</div>
+</div>`;
 }
 
 function getStoryItem() {
@@ -17,8 +79,18 @@ function getStoryItem() {
 }
 
 // (2) 스토리 스크롤 페이징하기
-$(window).scroll(() => {
+$(window).scroll(() => { // 윈도우 스크롤 이벤트
+	// console.log("윈도우 scrollTop",$(window).scrollTop());
+	// console.log("문서의 높이",$(document).height());
+	// console.log("윈도우 높이",$(window).height());
 
+	let checkNum = $(window).scrollTop() - ( $(document).height() - $(window).height() );
+	console.log(checkNum);
+
+	if(checkNum < 10 && checkNum > -10){
+		page++
+		storyLoad();
+	}
 });
 
 
