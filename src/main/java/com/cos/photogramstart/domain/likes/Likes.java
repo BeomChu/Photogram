@@ -2,6 +2,7 @@ package com.cos.photogramstart.domain.likes;
 
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Likes {
     @JoinColumn(name = "imageId")
     private Image image;
 
+    @JsonIgnoreProperties({"images"})
     @ManyToOne
     @JoinColumn (name = "userId")
     private User user;

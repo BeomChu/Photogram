@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Scanner;
+
 @Service
 @RequiredArgsConstructor
 public class LikesService {
@@ -19,6 +21,7 @@ public class LikesService {
     public void 좋아요취소(int imageId,int principalId){
         likesRepository.mUnLikes(imageId,principalId);
     }
+
 
 
 }

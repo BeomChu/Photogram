@@ -39,19 +39,11 @@ public class AuthController {
     @PostMapping("/auth/signup")
     public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  //key=value 형태 (x-www-form-urlencoded)가 default값
 
-        if(bindingResult.hasErrors()){
-            Map<String,String> errorMap = new HashMap<>();
 
-            for (FieldError error:bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(),error.getDefaultMessage());
-//                System.out.println(error.getDefaultMessage());
-            }
-            throw new CustomValidationException("유효성 검사 실패함",errorMap);
-        }else{
             User user= signupDto.toEntity();
             log.info(user.toString());
             authService.회원가입(user);
-        }
+
 //        log.info(signupDto.toString());
         //        System.out.println("signup 실행됨?"); //첫 시도 실행 안됨 //csrf토큰 해제하고 fhrmdl
         return "auth/signin";

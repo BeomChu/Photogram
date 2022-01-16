@@ -19,7 +19,6 @@ import java.util.UUID;
 public class Oauth2DetailsService extends DefaultOAuth2UserService{ // 시큐리티 userservice 서비스에 리턴타입 맞추기 위한 상속
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
